@@ -32,7 +32,7 @@ const Login = ()=>{
 
     if (isValid) {
       console.log('Successfully logged in');
-      navigate('/pages/CRUD/InputProducts');
+      navigate('/pages/CRUD/ProductList');
     }
   };
     return(

@@ -3,6 +3,7 @@ import { Button } from '../../components/Button';
 import { AddProduct } from '../../services/AddProduct';
 import { Logout } from '../../features/Logout';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export type InputProductProps = {
     id?: number;
@@ -23,6 +24,7 @@ const initialState: InputProductProps = {
     image: ''
 }
 export const InputProducts = () => {
+    const navigate= useNavigate();
  const [product, setProduct] = useState<InputProductProps>(initialState);
   
     const handleaction = async () => {
@@ -37,11 +39,18 @@ export const InputProducts = () => {
     const handleInputChange = (field: keyof InputProductProps, value: string | number) => {
         setProduct((prev) => ({ ...prev, [field]: value}));
     };
+    const handleClick=()=>{
+     console.log('Successfully ProductList page opened');
+      navigate('/pages/CRUD/ProductList');
+  }
 
 
     return(
       <div>
              <div><Logout/></div>
+             <div style={{display: 'flex', padding: '1rem'}}>
+                    <Button  name="View Product List" handleClick={handleClick}/>
+                  </div>
         <div>
           < div style={{display: 'flex', padding: '1rem'}}>
            <label htmlFor="title">Title:</label> <InputBox placeholder="Enter the title" value={product.title} onChange={(e) => handleInputChange('title', e.target.value)}/>
