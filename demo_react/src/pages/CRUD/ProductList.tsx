@@ -10,7 +10,7 @@ export const ProductList = () => {
       const navigate= useNavigate();
       const [products, setProducts] = useState<InputProductProps[]>([]);
     // Fetch products when the component mounts
- // useEffect(() => {
+ useEffect(() => {
     const fetchProducts = async () => {
       const data = await GetAllProducts();
       if (data) {
@@ -18,7 +18,7 @@ export const ProductList = () => {
       }
     };
     fetchProducts();
- // }, []);
+  }, []);
 
   const handleClick=()=>{
      console.log('Successfully InputProducts page opened');
