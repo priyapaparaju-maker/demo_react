@@ -5,12 +5,13 @@ import { Logout } from '../../features/Logout';
 import { Button } from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/Tablestyle.css'; // Import the CSS file
-
+import {useUser} from '../../store/UserContext';
 export const ProductList = () => {
       const navigate= useNavigate();
       const [products, setProducts] = useState<InputProductProps[]>([]);
     // Fetch products when the component mounts
- useEffect(() => {
+     const { username } = useUser();
+    useEffect(() => {
     const fetchProducts = async () => {
       const data = await GetAllProducts();
       if (data) {
@@ -27,6 +28,9 @@ export const ProductList = () => {
     
       return(
          <div>
+          <div>
+      <h1>Welcome, {username}!</h1>
+    </div>
             <div><Logout/></div>
               <div style={{display: 'flex', padding: '1rem'}}>
                     <Button  name="Enter new Product details" handleClick={handleClick}/>

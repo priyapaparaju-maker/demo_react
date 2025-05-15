@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { InputBox } from '../../components/InputBox';
 import { Button } from '../../components/Button';
 import { useState } from 'react';
+import {useUser} from '../../store/UserContext';
 
 
 const Login = ()=>{
@@ -11,7 +12,7 @@ const Login = ()=>{
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({ name: '', password: '' });
-  
+  const {setUsername} = useUser();
   const handleClick=()=>{
     let isValid = true;
     // Validate Name
@@ -31,6 +32,7 @@ const Login = ()=>{
     }
 
     if (isValid) {
+      setUsername(name);
       console.log('Successfully logged in');
       navigate('/pages/CRUD/ProductList');
     }
@@ -39,11 +41,11 @@ const Login = ()=>{
         <div>
       <div style={{display: 'flex', padding: '1rem'}}>
        <label htmlFor="name">Name:</label> 
-       <InputBox value={name} placeholder="Enter your name" onChange={(e) => setName(e.target.value)} />
+       <InputBox type ='text' value={name} placeholder="Enter your name" onChange={(e) => setName(e.target.value)} />
       </div>
       <div style={{display: 'flex', padding: '1rem'}}>
         <label htmlFor="password">Password:</label> 
-          <InputBox value={password} placeholder="Enter the password" onChange={(e) => setPassword(e.target.value)} />
+          <InputBox type ='password' value={password} placeholder="Enter the password" onChange={(e) => setPassword(e.target.value)} />
       </div>
       <div style={{display: 'flex', padding: '1rem'}}>
         <Button name="Submit" handleClick={handleClick}/>
